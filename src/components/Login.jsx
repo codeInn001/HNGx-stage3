@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Toastify from 'toastify-js'
 
 // import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
@@ -38,6 +39,21 @@ function Login() {
                 console.log(user);
             })
             .catch((error) => {
+                Toastify({
+                    text: "Wrong Email or password entered",
+                    duration: 4000,
+                    newWindow: true,
+                    close: true,
+                    gravity: "top", // `top` or `bottom`
+                    position: "left", // `left`, `center` or `right`
+                    stopOnFocus: true, // Prevents dismissing of toast on hover
+                    style: {
+                        background: "#736CC4",
+                        color: 'white',
+                        paddingBlock: '10px'
+                    },
+                     // Callback after click
+                }).showToast();
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorCode, errorMessage)
