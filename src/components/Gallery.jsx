@@ -25,15 +25,33 @@ function Gallery() {
     setGallery(filterSearch)
   }
 
-  function handleDragStyle(id) {
+  function handleDragStyleTrue(id) {
     const modifyGallery = gallery.map(data => {
       if(data.id === id) {
         console.log(data)
-       return data = {...data, mousedown: true}
+        data = {...data, mousedown: true}
+        console.log(data)
+        return data
       }
+      return data
     })
 
-    console.log(modifyGallery)
+    setGallery(modifyGallery)
+
+  }
+  
+  function handleDragStyleFalse(id) {
+    const modifyGallery = gallery.map(data => {
+      if(data.id === id) {
+        console.log(data)
+        data = {...data, mousedown: false}
+        console.log(data)
+        return data
+      }
+      return data
+    })
+
+    setGallery(modifyGallery)
 
   }
 
@@ -53,8 +71,11 @@ function Gallery() {
           gallery.map(data => {
             {/* const mousedown = data.mousedown ? data.mousedown: null */}
             return (
-              <Draggable onDrag={() => handleDragStyle(data.id)} scale={1.4}>
-                <div className="w-64 h-64" >
+              <Draggable 
+              onDrag={() => handleDragStyleTrue(data.id)} scale={1.4}
+              onStop={() => handleDragStyleFalse(data.id)}
+              >
+                <div className="w-64 h-64" style={{ boxShadow: data.mousedown ? 'rgba(0, 0, 0, 0.35) 0px 5px 15px' : 'none' }}>
                   <img className='object-cover w-64 h-full' src={data.imgSrc} alt="" srcset="" />
                   <div className='flex flex-wrap gap-1'>
                     {data.tags.map(tag => (
