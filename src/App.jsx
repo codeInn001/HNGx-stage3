@@ -9,7 +9,7 @@ import { Route, Routes } from 'react-router-dom'
 function App() {
   return (
     
-    <div className='m-8'>
+    <div className='m-8 m-w-3/5 padding-8'>
       <Routes>                                                                        
         <Route path="/" element={<Login />} />
         <Route path="/gallery" element={<Gallery />} />

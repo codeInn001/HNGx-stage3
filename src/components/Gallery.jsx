@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import galleryData from '../utils/galleryData'
 import Draggable from 'react-draggable'
 import Search from './Search'
+import Toastify from 'toastify-js'
 import { data } from 'autoprefixer'
 
 function Gallery() {
@@ -21,8 +22,26 @@ function Gallery() {
 
 
   function handleSearch() {
-    if (filterSearch.length <= 0) return;
-    setGallery(filterSearch)
+    if (filterSearch.length > 0) setGallery(filterSearch)
+    if (filterSearch.length <= 0){
+      Toastify({
+        text: "Invalid search input. Enter a valid text",
+        duration: 4000,
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "left", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "#736CC4",
+          color: 'white',
+          paddingBlock: '10px',
+          width: '100%'
+        },
+        // Callback after click
+      }).showToast();
+    } return;
+    
   }
 
   function handleDragStyleTrue(id) {
@@ -65,7 +84,7 @@ function Gallery() {
   return (
     <>
       <Search setSearchInput={setSearchInput} handleSearch={handleSearch} filterSearch={filterSearch} />
-      <div className='flex flex-wrap justify-center gap-x-8 gap-y-16 h-screen padding-8'>
+      <div className='flex flex-wrap justify-center gap-x-8 gap-y-16 h-screen '>
 
         {
           gallery.map(data => {

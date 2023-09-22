@@ -7,7 +7,7 @@ function Search({setSearchInput, searchInput, handleSearch, filterSearch}) {
 
 
   return (
-    <div className='mb-24 flex justify-center w-screen gap-2'>
+    <div className='mb-24 flex justify-center  gap-2'>
       <input placeholder='What do you want to see?' 
       className='border-2 w-3/5 p-2 rounded-md' 
       type="search" 
