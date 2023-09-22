@@ -109,12 +109,13 @@ function Gallery() {
               onStop={() => handleDragStyleFalse(data.id)}
               >
                 <div className="w-64 h-64" style={{ boxShadow: data.mousedown ? 'rgba(0, 0, 0, 0.35) 0px 5px 15px' : 'none' }}>
-                  <LazyLoadImage PlaceholderSrc={imagePlaceholder} 
+                  <LazyLoadImage 
                   width={256} height={256}
                   className='object-cover w-64 h-full' 
                   src={data.imgSrc} 
                   alt={data.tags} 
-                    effect='blur'
+                    PlaceholderSrc={imagePlaceholder}
+                  effect='blur'
                    />
                   <div className='flex flex-wrap gap-1'>
                     {data.tags.map(tag => (
