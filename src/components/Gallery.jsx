@@ -3,11 +3,15 @@ import galleryData from '../utils/galleryData'
 import Draggable from 'react-draggable'
 import Search from './Search'
 import Toastify from 'toastify-js'
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import imagePlaceholder from '../assets/placehoderr.jpg'
+import 'react-lazy-load-image-component/src/effects/blur.css';
 import { data } from 'autoprefixer'
 
 function Gallery() {
 
   const [searchImage, setSearchImage] = useState([])
+  const [users, setUsers] = useState([])
 
   const [gallery, setGallery] = useState(galleryData)
   const [searchInput, setSearchInput] = useState('search')
@@ -62,9 +66,7 @@ function Gallery() {
   function handleDragStyleFalse(id) {
     const modifyGallery = gallery.map(data => {
       if(data.id === id) {
-        console.log(data)
         data = {...data, mousedown: false}
-        console.log(data)
         return data
       }
       return data
@@ -76,9 +78,21 @@ function Gallery() {
 
   
 
+  const fetchUserData = () => {
+    fetch("https://github.com/codeInn001/codeinn001.github.io/blob/main/db.json")
+      .then(response => {
+        return response.json()
+      })
+      .then(data => {
+        setUsers(data)
+        console.log(users)
+      })
+  }
 
+ useEffect(() => {
 
-  console.log(gallery)
+   fetchUserData()
+ }, [])
 
 
   return (
@@ -95,7 +109,13 @@ function Gallery() {
               onStop={() => handleDragStyleFalse(data.id)}
               >
                 <div className="w-64 h-64" style={{ boxShadow: data.mousedown ? 'rgba(0, 0, 0, 0.35) 0px 5px 15px' : 'none' }}>
-                  <img className='object-cover w-64 h-full' src={data.imgSrc} alt="" srcset="" />
+                  <LazyLoadImage PlaceholderSrc={imagePlaceholder} 
+                  width={256} height={256}
+                  className='object-cover w-64 h-full' 
+                  src={data.imgSrc} 
+                  alt={data.tags} 
+                    effect='blur'
+                   />
                   <div className='flex flex-wrap gap-1'>
                     {data.tags.map(tag => (
                       <span className='bg-[#FDD] text-[#000] py-p[x] text-xs px-2 mt-2 mb-1 rounded-md'>{tag}</span>
