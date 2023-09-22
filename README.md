@@ -18,8 +18,8 @@ Users need to
 
 ## Run locally
 To run the project locally,
-1. Clone the project
-`git clone repository`
+1. Clone the repository
+`git clone https://github.com/codeInn001/HNGx-stage3.git`
 2. Run
 `npm install`
 3. Run
