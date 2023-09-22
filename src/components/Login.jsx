@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Header from './Header';
 import Toastify from 'toastify-js'
 
 // import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
@@ -63,6 +64,8 @@ function Login() {
 
 
     return (
+        <>
+        <Header />
         <div className=' h-1/2 md:px-10'>
             <form action="" className='flex flex-col h-full gap-2 items-center '>
                 <div className='email-parent flex flex-col w-1/4 md:w-4/5'>
@@ -76,6 +79,7 @@ function Login() {
                 <button className='bg-[#736CC4] text-[#DAFAFF] w-1/4 p-2 rounded-lg md:w-4/5' type="submit" onClick={onLogin} >Login</button>
             </form>
         </div>
+        </>
     )
 }
 
